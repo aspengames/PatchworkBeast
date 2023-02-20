@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/forest_walk.mp3-b898641c232baa7ba534c3b82e259cf7.mp3str"
+
+[deps]
+
+source_file="res://music/forest_walk.mp3"
+dest_files=[ "res://.import/forest_walk.mp3-b898641c232baa7ba534c3b82e259cf7.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -2,6 +2,7 @@ extends CanvasLayer
 
 
 const CHAR_READ_RATE = 0.05
+var speed = 100
 
 onready var textbox_container = $TextboxContainer
 onready var start_symbol = $TextboxContainer/MarginContainer/HBoxContainer/Start
@@ -32,7 +33,7 @@ func _process(delta):
 	match current_state:
 		State.READY:
 			if !text_queue.empty():
-				player.speed = 0
+				speed = 0
 				display_text()
 		State.READING:
 			if Input.is_action_just_pressed("ui_accept"):
@@ -58,7 +59,7 @@ func hide_textbox():
 	label.text = ""
 	if all_finished == true:
 		textbox_container.hide()
-		player.speed = 160
+		speed = 160
 	
 func show_textbox():
 	all_finished = false
