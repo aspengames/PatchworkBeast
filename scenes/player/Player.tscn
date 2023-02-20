@@ -199,7 +199,7 @@ parameters/Walk/blend_position = Vector2( -0.0017432, 0.0568966 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
-zoom = Vector2( 2, 2 )
+zoom = Vector2( 1.25, 1.25 )
 smoothing_enabled = true
 
 [node name="Textbox" parent="Camera2D" instance=ExtResource( 3 )]

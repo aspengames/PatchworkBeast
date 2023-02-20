@@ -2,7 +2,7 @@ extends KinematicBody2D
 
 var interacted = false
 var can_interact = true
-onready var textbox = $"../../Player/Camera2D/Textbox"
+onready var textbox = $"../../YSort/Player/Camera2D/Textbox"
 
 # Declare member variables here. Examples:
 # var a = 2
@@ -31,7 +31,8 @@ func _on_hitbox_body_entered(body):
 func _check_interaction():
 	if Input.is_action_just_pressed("interact") and can_interact:
 		print("interact successful")
-		textbox.queue_text("npc dialogue text npc dialogue tex npc dialogue texv npc dialogue tex npc dialogue tex npc dialogue texnpc dialogue texnpc dialogue tex")
+		textbox.queue_text("Ew... a human...")
+		textbox.queue_text("Why do you even come around these parts?")
 		can_interact = false
 
 

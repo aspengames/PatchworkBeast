@@ -18,6 +18,7 @@ enum State {
 var current_state = State.READY
 var text_queue = []
 var all_finished = false
+var textbox_name = ""
 
 onready var player = $"../.."
 
@@ -36,13 +37,13 @@ func _process(delta):
 				speed = 0
 				display_text()
 		State.READING:
-			if Input.is_action_just_pressed("ui_accept"):
+			if Input.is_action_just_pressed("interact"):
 				label.percent_visible = 1.0
 				$Tween.stop_all()
 				end_symbol.text = "v"
 				change_state(State.FINISHED)
 		State.FINISHED:
-			if Input.is_action_just_pressed("ui_accept"):
+			if Input.is_action_just_pressed("interact"):
 				change_state(State.READY)
 				if text_queue.empty():
 					all_finished = true
@@ -53,14 +54,17 @@ func queue_text(next_text):
 	text_queue.push_back(next_text)
 	
 	
+func set_name(txtname):
+	pass
+	
 func hide_textbox():
 	start_symbol.text = ""
 	end_symbol.text = ""
 	label.text = ""
 	if all_finished == true:
 		textbox_container.hide()
-		$Textbox.hide()
-		$TalkNPC.hide()
+		$Detail/Textbox.hide()
+		$Detail/TalkNPC.hide()
 		$Overlay.hide()
 		speed = 160
 	
@@ -68,8 +72,8 @@ func show_textbox():
 	all_finished = false
 	start_symbol.text = "*"
 	textbox_container.show()
-	$Textbox.show()
-	$TalkNPC.show()
+	$Detail/Textbox.show()
+	$Detail/TalkNPC.show()
 	$Overlay.show()
 	
 func display_text():

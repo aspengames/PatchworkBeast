@@ -1,12 +1,17 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://fonts/Lucida Sans Unicode.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://scenes/player/Textbox.gd" type="Script" id=2]
 [ext_resource path="res://art/npc/dialogue_npc.png" type="Texture" id=3]
-[ext_resource path="res://art/npc/textbox.png" type="Texture" id=4]
+[ext_resource path="res://art/npc/textbox1.png" type="Texture" id=4]
+[ext_resource path="res://fonts/DraconisBold.ttf" type="DynamicFontData" id=5]
 
 [sub_resource type="CanvasItemMaterial" id=3]
 blend_mode = 3
+
+[sub_resource type="DynamicFont" id=4]
+size = 128
+font_data = ExtResource( 5 )
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0, 0, 0, 1 )
@@ -17,7 +22,7 @@ border_width_bottom = 10
 border_color = Color( 1, 1, 1, 1 )
 
 [sub_resource type="DynamicFont" id=2]
-size = 20
+size = 35
 use_filter = true
 extra_spacing_top = -10
 font_data = ExtResource( 1 )
@@ -33,34 +38,48 @@ margin_left = 3.0
 margin_right = 3.0
 color = Color( 0.517647, 0.580392, 0.733333, 1 )
 
-[node name="Textbox" type="Sprite" parent="."]
-position = Vector2( 553, 450 )
-scale = Vector2( 0.160371, 0.160371 )
+[node name="Detail" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Textbox" type="Sprite" parent="Detail"]
+position = Vector2( 1126.37, 777.112 )
+scale = Vector2( 0.387901, 0.320019 )
 texture = ExtResource( 4 )
 
-[node name="TalkNPC" type="Sprite" parent="."]
-position = Vector2( 345.5, 382.367 )
-scale = Vector2( 0.211255, 0.211255 )
+[node name="Name" type="Label" parent="Detail/Textbox"]
+margin_left = -1168.78
+margin_top = -615.937
+margin_right = -468.779
+margin_bottom = -474.937
+custom_colors/font_color = Color( 0.121569, 0.0705882, 0.0705882, 1 )
+custom_fonts/font = SubResource( 4 )
+text = "Nemesis"
+align = 1
+
+[node name="TalkNPC" type="Sprite" parent="Detail"]
+position = Vector2( 519.25, 645.112 )
+scale = Vector2( 0.39714, 0.39714 )
 texture = ExtResource( 3 )
 
 [node name="TextboxContainer" type="MarginContainer" parent="."]
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 420.0
-margin_top = -207.0
-margin_right = -304.0
-margin_bottom = -37.0
+margin_left = 710.0
+margin_top = -414.0
+margin_right = -410.0
+margin_bottom = -114.0
 
 [node name="Panel" type="Panel" parent="TextboxContainer"]
 visible = false
-margin_right = 300.0
-margin_bottom = 170.0
+margin_right = 800.0
+margin_bottom = 300.0
 custom_styles/panel = SubResource( 1 )
 
 [node name="MarginContainer" type="MarginContainer" parent="TextboxContainer"]
-margin_right = 300.0
-margin_bottom = 170.0
+margin_right = 800.0
+margin_bottom = 300.0
 custom_constants/margin_right = 20
 custom_constants/margin_top = 20
 custom_constants/margin_left = 20
@@ -70,18 +89,18 @@ custom_constants/margin_bottom = 20
 visible = false
 margin_left = 20.0
 margin_top = 20.0
-margin_right = 280.0
-margin_bottom = 150.0
+margin_right = 780.0
+margin_bottom = 280.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="TextboxContainer/MarginContainer"]
 margin_left = 20.0
 margin_top = 20.0
-margin_right = 280.0
-margin_bottom = 150.0
+margin_right = 780.0
+margin_bottom = 280.0
 
 [node name="Start" type="Label" parent="TextboxContainer/MarginContainer/HBoxContainer"]
 margin_right = 20.0
-margin_bottom = 21.0
+margin_bottom = 45.0
 rect_min_size = Vector2( 20, 0 )
 size_flags_vertical = 0
 custom_colors/font_color = Color( 0.121569, 0.0705882, 0.0705882, 1 )
@@ -90,8 +109,8 @@ text = "*"
 
 [node name="Label" type="Label" parent="TextboxContainer/MarginContainer/HBoxContainer"]
 margin_left = 24.0
-margin_right = 236.0
-margin_bottom = 130.0
+margin_right = 728.0
+margin_bottom = 260.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_colors/font_color = Color( 0.121569, 0.0705882, 0.0705882, 1 )
@@ -102,10 +121,10 @@ autowrap = true
 clip_text = true
 
 [node name="End" type="Label" parent="TextboxContainer/MarginContainer/HBoxContainer"]
-margin_left = 240.0
-margin_top = 109.0
-margin_right = 260.0
-margin_bottom = 130.0
+margin_left = 732.0
+margin_top = 215.0
+margin_right = 760.0
+margin_bottom = 260.0
 rect_min_size = Vector2( 20, 0 )
 size_flags_vertical = 8
 custom_colors/font_color = Color( 0.121569, 0.0705882, 0.0705882, 1 )
