@@ -59,12 +59,18 @@ func hide_textbox():
 	label.text = ""
 	if all_finished == true:
 		textbox_container.hide()
+		$Textbox.hide()
+		$TalkNPC.hide()
+		$Overlay.hide()
 		speed = 160
 	
 func show_textbox():
 	all_finished = false
 	start_symbol.text = "*"
 	textbox_container.show()
+	$Textbox.show()
+	$TalkNPC.show()
+	$Overlay.show()
 	
 func display_text():
 	var next_text = text_queue.pop_front()
