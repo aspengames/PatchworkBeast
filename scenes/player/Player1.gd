@@ -16,7 +16,7 @@ var velocity = Vector2()
 var delta_velocity = Vector2()
 
 #speed managers
-var max_speed = 50
+var max_speed = 40
 var speed_multiplier = 1000
 var true_max_speed = max_speed * speed_multiplier
 
