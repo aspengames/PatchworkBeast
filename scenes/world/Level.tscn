@@ -7,7 +7,6 @@
 [ext_resource path="res://scenes/ui/MainMenu.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/mob/mob.tscn" type="PackedScene" id=6]
 
-
 [sub_resource type="ConvexPolygonShape2D" id=8]
 points = PoolVector2Array( 119.101, 47.4978, 67.2612, 66.4194, 2.97974, 47.4978, 65.1877, 0 )
 

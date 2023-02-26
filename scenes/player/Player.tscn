@@ -1,42 +1,17 @@
 [gd_scene load_steps=32 format=2]
 
-[ext_resource path="res://art/player/spritesheet_transparent.png" type="Texture" id=1]
 [ext_resource path="res://scenes/player/Player1.gd" type="Script" id=2]
 [ext_resource path="res://scenes/player/Textbox.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/player/color.tscn" type="PackedScene" id=4]
 [ext_resource path="res://art/player/overlay_forest.png" type="Texture" id=5]
 [ext_resource path="res://scenes/ui/ui.tscn" type="PackedScene" id=6]
+[ext_resource path="res://art/player/player_spritesheet.png" type="Texture" id=7]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8, 13 )
 
 [sub_resource type="Animation" id=2]
 length = 0.001
-
-[sub_resource type="Animation" id=3]
-resource_name = "idle_down"
-length = 0.1
-loop = true
-
-[sub_resource type="Animation" id=4]
-resource_name = "idle_left"
-length = 0.1
-loop = true
-
-[sub_resource type="Animation" id=5]
-resource_name = "idle_right"
-length = 0.1
-loop = true
-
-[sub_resource type="Animation" id=6]
-resource_name = "idle_up"
-length = 0.1
-loop = true
-
-[sub_resource type="Animation" id=7]
-resource_name = "walk_down"
-length = 0.2
-loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -44,16 +19,107 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 8 ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "idle_down"
+length = 0.6
+loop = true
+step = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ 4, 5, 26 ]
+"values": [ 16, 17 ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "idle_left"
+length = 0.6
+loop = true
+step = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 20, 21 ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "idle_right"
+length = 0.6
+loop = true
+step = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 22, 23 ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "idle_up"
+length = 0.6
+loop = true
+step = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 18, 19 ]
+}
+
+[sub_resource type="Animation" id=7]
+resource_name = "walk_down"
+length = 0.6
+loop = true
+step = 0.15
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.15, 0.3, 0.45 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
 }
 
 [sub_resource type="Animation" id=8]
 resource_name = "walk_left"
-length = 0.2
+length = 0.6
 loop = true
+step = 0.15
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -61,16 +127,17 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.15, 0.3, 0.45 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 2, 3, 38 ]
+"values": [ 8, 9, 10, 11 ]
 }
 
 [sub_resource type="Animation" id=9]
 resource_name = "walk_right"
-length = 0.2
+length = 0.6
 loop = true
+step = 0.15
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -78,16 +145,17 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.15, 0.3, 0.45 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 6, 7, 14 ]
+"values": [ 12, 13, 14, 15 ]
 }
 
 [sub_resource type="Animation" id=10]
 resource_name = "walk_up"
-length = 0.2
+length = 0.6
 loop = true
+step = 0.15
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -95,10 +163,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0, 0.15, 0.3, 0.45 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 0, 1 ]
+"values": [ 4, 5, 6, 7 ]
 }
 
 [sub_resource type="AnimationNodeAnimation" id=11]
@@ -180,10 +248,12 @@ shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
 scale = Vector2( 0.1, 0.1 )
-texture = ExtResource( 1 )
+texture = ExtResource( 7 )
 hframes = 8
+vframes = 3
+frame = 8
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 2 )
 anims/idle_down = SubResource( 3 )
 anims/idle_left = SubResource( 4 )
@@ -196,7 +266,7 @@ anims/walk_up = SubResource( 10 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource( 16 )
-anim_player = NodePath("../AnimationPlayer")
+anim_player = NodePath("../AnimationPlayer2")
 active = true
 parameters/playback = SubResource( 17 )
 parameters/Idle/blend_position = Vector2( 0, 0.0603448 )
