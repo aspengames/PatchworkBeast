@@ -23,6 +23,11 @@ var true_max_speed = max_speed * speed_multiplier
 #acceleration/deceleration lerping weight
 const ACCEL_WEIGHT = .3
 
+onready var atkTimer = $atkTimer
+onready var hurtTimer = $hurtTimer
+#init the nift
+export(PackedScene) var NIFT: PackedScene = preload("res://projectiles/Nift.tscn")
+
 """ -------- FUNCTIONS -------- """
 #initialize variables
 func _ready():
@@ -74,7 +79,58 @@ func _physics_process(delta):
 			$AnimationTree.get("parameters/playback").travel("Walk")
 			$AnimationTree.set("parameters/Idle/blend_position", velocity)
 			$AnimationTree.set("parameters/Walk/blend_position", velocity)
-	
+			
+	if Input.is_action_just_pressed("action_attack") and atkTimer.is_stopped():
+			#get_global_mouse_position() for shooting towards mouse
+			#print("rotation is: ",  rotation)
+			var nift_direction = self.global_position.direction_to(get_global_mouse_position())
+			throw_nift(nift_direction)
+	if enemyin and hurtTimer.is_stopped():
+		enemyin = true
+		health -= 1
+		$ui/health.value = health
+		print(health)
+		hurtTimer.start()
 	#applying the needed vector to the object, to make it move thanks to the move_and_slide function
 	move_and_slide(delta_velocity)
 	pass
+
+var enemyin = false
+var health = 80
+func _on_HITBOX_body_entered(body):
+	if body.is_in_group("charge_mob") and hurtTimer.is_stopped():
+		enemyin = true
+		health -= 5
+		$ui/health.value = health
+		print(health)
+		hurtTimer.start()
+
+func _on_HITBOX_body_exited(body):
+	if body.is_in_group("charge_mob"):
+		hurtTimer.stop()
+		enemyin = false
+
+func throw_nift(nift_direction: Vector2):
+	if NIFT:
+		var nift = NIFT.instance()
+		get_tree().current_scene.get_node("YSort/projectiles").add_child(nift)
+		nift.global_position = self.global_position#self.global_positions
+		#nift.z_index = -1
+		var nift_rotation = nift_direction.angle()
+		nift.rotation = nift_rotation
+		#$"../laserbgm".play()
+		atkTimer.start()
+		nift.get_node("pars").emitting = true
+		#print(nift_direction)
+		#var mouse_direction = Vector3(nift_direction.x, nift_direction.y, 0)
+		#nift.get_node("pars").process_material.set("direction", mouse_direction)
+		#print($pars.process_material.get("direction"))
+#		var is_moving = Input.is_action_pressed("move_up") or Input.is_action_pressed("move_right") or Input.is_action_pressed("move_down") or Input.is_action_pressed("move_left")
+#		if not is_moving:
+#			$AnimationTree.get("parameters/playback").travel("Idle")
+#		else:
+#			$AnimationTree.get("parameters/playback").travel("Walk")
+#			$AnimationTree.set("parameters/Idle/blend_position", get_global_mouse_position())
+#			$AnimationTree.set("parameters/Walk/blend_position", get_global_mouse_position())
+
+

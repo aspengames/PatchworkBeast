@@ -1,0 +1,172 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://mob.gd" type="Script" id=1]
+[ext_resource path="res://art/mob/mob1_spritesheet.png" type="Texture" id=2]
+[ext_resource path="res://projectiles/particle2.png" type="Texture" id=3]
+
+[sub_resource type="CapsuleShape2D" id=8]
+
+[sub_resource type="TileSet" id=2]
+
+[sub_resource type="Animation" id=3]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1 ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "mob_down"
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "mob_left"
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 8, 9, 10, 11 ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "mob_right"
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 12, 13, 14, 15 ]
+}
+
+[sub_resource type="Animation" id=7]
+resource_name = "mob_up"
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 4, 5, 6, 7 ]
+}
+
+[sub_resource type="ParticlesMaterial" id=9]
+emission_shape = 5
+emission_ring_radius = 300.0
+emission_ring_inner_radius = 200.0
+emission_ring_height = 50.0
+emission_ring_axis = Vector3( 0, 0, 1 )
+flag_disable_z = true
+gravity = Vector3( 100, 0, 0 )
+orbit_velocity = 0.2
+orbit_velocity_random = 0.0
+scale = 0.5
+
+[sub_resource type="Animation" id=10]
+length = 0.001
+
+[sub_resource type="Animation" id=11]
+resource_name = "dead"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[node name="mob" type="KinematicBody2D" groups=["charge_mob"]]
+collision_mask = 9
+script = ExtResource( 1 )
+
+[node name="col" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2( 0, 250 )
+scale = Vector2( 15, 15 )
+shape = SubResource( 8 )
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = SubResource( 2 )
+format = 1
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+hframes = 8
+vframes = 2
+frame = 1
+
+[node name="anim" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 3 )
+anims/mob_down = SubResource( 4 )
+anims/mob_left = SubResource( 5 )
+anims/mob_right = SubResource( 6 )
+anims/mob_up = SubResource( 7 )
+
+[node name="pars" type="Particles2D" parent="."]
+position = Vector2( -100, 300 )
+emitting = false
+amount = 50
+lifetime = 3.0
+one_shot = true
+process_material = SubResource( 9 )
+texture = ExtResource( 3 )
+
+[node name="deadanim" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 10 )
+anims/dead = SubResource( 11 )
+
+[node name="vis" type="VisibilityNotifier2D" parent="."]
+
+[node name="deathTimer" type="Timer" parent="."]
+wait_time = 3.0
+
+[connection signal="animation_finished" from="deadanim" to="." method="_on_deadanim_animation_finished"]
+[connection signal="screen_entered" from="vis" to="." method="_on_vis_screen_entered"]
+[connection signal="screen_exited" from="vis" to="." method="_on_vis_screen_exited"]
+[connection signal="timeout" from="deathTimer" to="." method="_on_deathTimer_timeout"]
